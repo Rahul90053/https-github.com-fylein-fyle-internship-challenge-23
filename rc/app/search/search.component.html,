@@ -1,0 +1,13 @@
+<div>
+  <h1>GitHub Repository Viewer</h1>
+  <input [(ngModel)]="username" placeholder="Enter GitHub username" />
+  <button (click)="search()">Search</button>
+  
+  <div *ngIf="errorMessage">{{ errorMessage }}</div>
+  
+  <ul *ngIf="repos.length">
+    <li *ngFor="let repo of repos">
+      <a [href]="repo.html_url" target="_blank">{{ repo.name }}</a>
+    </li>
+  </ul>
+</div>
