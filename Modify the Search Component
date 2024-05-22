@@ -1,0 +1,28 @@
+import { Component } from '@angular/core';
+import { GithubService } from '../github.service';
+
+@Component({
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css']
+})
+export class SearchComponent {
+  username: string = '';
+  repos: any[] = [];
+  errorMessage: string = '';
+
+  constructor(private githubService: GithubService) { }
+
+  search(): void {
+    this.githubService.getUserRepos(this.username).subscribe(
+      (data) => {
+        this.repos = data;
+        this.errorMessage = '';
+      },
+      (error) => {
+        this.errorMessage = 'User not found or API limit exceeded';
+        this.repos = [];
+      }
+    );
+  }
+}
