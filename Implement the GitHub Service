@@ -1,0 +1,23 @@
+# https-github.com-fylein-fyle-internship-challenge-23
+ng new github-repo-viewer
+cd github-repo-viewer
+ng generate component search
+ng generate component repos
+ng generate service github
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class GithubService {
+
+  private apiUrl = 'https://api.github.com/users';
+
+  constructor(private http: HttpClient) { }
+
+  getUserRepos(username: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${username}/repos`);
+  }
+}
